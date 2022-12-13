@@ -25,7 +25,9 @@ look_back = current_time - timedelta(hours=2)
 last_seen = look_back.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 # CrowdStrike API Filters
-PARAMS = {'limit': 2000, 'filter': "last_seen:>'" + last_seen + "'"}
+PARAMS = {'limit': 2000, 
+          'filter': "last_seen:>'" + last_seen + "'", 
+          'sort':'last_seen.asc'}
 
 # CS_devices_limit =
 # CS_devices_filter = "&filter=last_seen:>'2021-10-05T00:00:12Z'" #Time may be configured but needs to remain in single quotation marks
@@ -40,7 +42,7 @@ CS_devices_base_url = 'https://api.crowdstrike.com'
 # CrowdStrike API endpoints
 CS_devices_tokenURL = "/oauth2/token"
 CS_devices_scroll_url = "/devices/queries/devices-scroll/v1"
-CS_devices_url = "/devices/entities/devices/v1?"
+CS_devices_url = "/devices/entities/devices/v2"
 
 # Humio HEC configuration
 
@@ -54,7 +56,7 @@ HumioHECurl = HumioBaseURL+'/api/v1/ingest/hec/raw'
 HumioHECtoken_Devices = ''
 
 # Header Content Type
-HumioHECcontent_Devices = "'application/json', 'Accept':'application/json'"
+HumioHECcontent_Devices = "'application/json; charset=utf-8', 'Accept':'application/json'"
 
 # Certficate validation - should only be set to false in a controlled test environment
 HumioHECverify = True
