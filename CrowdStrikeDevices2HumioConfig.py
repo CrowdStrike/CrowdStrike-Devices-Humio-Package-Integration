@@ -21,6 +21,7 @@ CS_devices_proxies = {}
 
 # use a timedelta to create a time in the past to populate the 'last_seen' filter
 current_time = datetime.datetime.now()
+#current_time = datetime.datetime.now(timezone.utc) #set timezone to UTC
 look_back = current_time - timedelta(hours=2)
 last_seen = look_back.strftime("%Y-%m-%dT%H:%M:%SZ")
 
