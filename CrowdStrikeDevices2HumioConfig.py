@@ -3,7 +3,7 @@
 # python imports
 import logging
 import datetime
-from datetime import timedelta
+from datetime import timedelta,timezone
 
 # Set Logging level and file name
 CS_devices_log_level = logging.DEBUG
@@ -20,7 +20,9 @@ CS_devices_proxies = {}
 # CrowdStrike Devices Configuration
 
 # use a timedelta to create a time in the past to populate the 'last_seen' filter
-current_time = datetime.datetime.now()
+# current_time timezone parameter can lead to device count discrepancies against device counts
+# shown in the the Falcon web portal, ensure it is set appropriately. 
+current_time = datetime.datetime.now(timezone.utc)
 look_back = current_time - timedelta(hours=2)
 last_seen = look_back.strftime("%Y-%m-%dT%H:%M:%SZ")
 
